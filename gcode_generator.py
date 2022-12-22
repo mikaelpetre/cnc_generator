@@ -15,6 +15,7 @@ def show():
     show_program.geometry("400x400")
 
     # Create label which will show program
+
     listToStr = " ".join(map(str, program))
 
     program_label = Label(show_program, text= "% \n O4536 \n G50 S5000 \n P1 M98 \n" + listToStr + "M30 \n %")
@@ -35,6 +36,7 @@ def save():
     global program
 
     # Get the values from the boxes
+
     tool = tool_box.get()
     start_dia = start_dia_box.get()
     stock_z = stock_z_box.get()
@@ -74,10 +76,12 @@ def save():
     
     
     # Create a button in main window to show operation specs
+
     edit_op_button = Button(root, text=selected_operation, command=view_specs)
     edit_op_button.grid(row=len(selected_operations), column=0)
 
     # Create a button in main window to show program
+
     show_program_button = Button(root, text="Visa program", command=show)
     show_program_button.grid(row=0, column=4)
 
@@ -103,17 +107,15 @@ def add():
     op_specs.geometry("400x400")
 
     # Remember selected operation
+
     selected_operation = variable.get()
 
     # Create labels and entry boxes common for all operations
+    
+    # Tool
+
     tool_label = Label(op_specs, text="Verktyg")
     tool_label.grid(row=0, column=0)
-
-    start_dia_label = Label(op_specs, text="Positionering i X")
-    start_dia_label.grid(row=1, column=0)
-
-    stock_z_label = Label(op_specs, text="Positionering i Z")
-    stock_z_label.grid(row=2, column=0)
 
     tool_box = Entry(op_specs, width=10)
     if selected_operation == "Planing":
@@ -122,8 +124,18 @@ def add():
         tool_box.insert(END, "0101")
     tool_box.grid(row=0, column=1)
 
+    # Start dia
+
+    start_dia_label = Label(op_specs, text="Positionering i X")
+    start_dia_label.grid(row=1, column=0)
+
     start_dia_box = Entry(op_specs, width=10)
     start_dia_box.grid(row=1, column=1)
+
+    # Stock Z
+
+    stock_z_label = Label(op_specs, text="Positionering i Z")
+    stock_z_label.grid(row=2, column=0)
 
     stock_z_box = Entry(op_specs, width=10)
     if selected_operation == "Planing":
@@ -136,22 +148,28 @@ def add():
 
     if selected_operation == "Planing":
 
+        # End dia
+
         end_dia_label = Label(op_specs, text="Slut dia")
         end_dia_label.grid(row=3, column=0)
         
         end_dia_box = Entry(op_specs, width=10)
         end_dia_box.insert(END, "-1")
         end_dia_box.grid(row=3, column=1)
-        
-        doc_z_label = Label(op_specs, text="Skärdjup i Z") # Depth of Cut
-        doc_z_label.grid(row=4, column=0)
 
-        leave_z_label = Label(op_specs, text="Lämna i Z")
-        leave_z_label.grid(row=5, column=0)
+        # Depth of cut
+
+        doc_z_label = Label(op_specs, text="Skärdjup i Z")
+        doc_z_label.grid(row=4, column=0)
 
         doc_z_box = Entry(op_specs, width=10)
         doc_z_box.insert(END, "0.1")
         doc_z_box.grid(row=4, column=1)
+
+        # Leave Z
+
+        leave_z_label = Label(op_specs, text="Lämna i Z")
+        leave_z_label.grid(row=5, column=0)
     
         leave_z_box = Entry(op_specs, width=10)
         leave_z_box.insert(END, "0.05")
@@ -169,41 +187,56 @@ def view_specs():
     op_specs.geometry("400x400")
 
     # Create labels and entry boxes common for all operations
+
+    # Tool    
+
     tool_label = Label(op_specs, text="Verktyg")
     tool_label.grid(row=0, column=0)
-
-    start_dia_label = Label(op_specs, text="Positionering i X")
-    start_dia_label.grid(row=1, column=0)
-
-    stock_z_label = Label(op_specs, text="Positionering i Z")
-    stock_z_label.grid(row=2, column=0)
 
     tool_box = Entry(op_specs, width=10)
     tool_box.grid(row=0, column=1)
 
+    # Start dia
+
+    start_dia_label = Label(op_specs, text="Positionering i X")
+    start_dia_label.grid(row=1, column=0)
+
     start_dia_box = Entry(op_specs, width=10)
     start_dia_box.grid(row=1, column=1)
+
+    # Stock Z
+    
+    stock_z_label = Label(op_specs, text="Positionering i Z")
+    stock_z_label.grid(row=2, column=0)
 
     stock_z_box = Entry(op_specs, width=10)
     stock_z_box.grid(row=2, column=1)
 
 
     # Create labels for entry boxes for specific operations
+
     if selected_operation == "Planing":
+
+        # End dia
+
         end_dia_label = Label(op_specs, text="Slut dia")
         end_dia_label.grid(row=3, column=0)
-
-        doc_z_label = Label(op_specs, text="Skärdjup i Z") # Depth of Cut
-        doc_z_label.grid(row=4, column=0)
-
-        leave_z_label = Label(op_specs, text="Lämna i Z")
-        leave_z_label.grid(row=5, column=0)
 
         end_dia_box = Entry(op_specs, width=10)
         end_dia_box.grid(row=3, column=1)
 
+        # Depth of cut Z
+
+        doc_z_label = Label(op_specs, text="Skärdjup i Z") # Depth of Cut
+        doc_z_label.grid(row=4, column=0)
+
         doc_z_box = Entry(op_specs, width=10)
         doc_z_box.grid(row=4, column=1)
+        
+        # Leave Z
+
+        leave_z_label = Label(op_specs, text="Lämna i Z")
+        leave_z_label.grid(row=5, column=0)
     
         leave_z_box = Entry(op_specs, width=10)
         leave_z_box.grid(row=5, column=1)
@@ -214,6 +247,7 @@ def view_specs():
     save_op.grid(row=6, column=0, columnspan=2)
 
     # Insert values
+
     tool_box.insert(0, tool)
     start_dia_box.insert(0, start_dia)
     stock_z_box.insert(0, stock_z)
@@ -224,16 +258,23 @@ def view_specs():
         leave_z_box.insert(0, leave_z)
 
 # Main window
-# Create a dropdown menu to choose operation
+
+# Create list for your program
 
 program = []
+
+# Create list for available operations
 
 operations = [
     "Planing",
     "Finplaning",
 ]
 
+# Create liset for selected operations
+
 selected_operations = []
+
+# Create a dropdown menu to choose operation
 
 variable = StringVar()
 variable.set("Planing") # Default value
